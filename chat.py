@@ -16,12 +16,12 @@ load_dotenv()
 # check if storage already exists
 PERSIST_DIR = "./storage"
 
-if not os.path.exists(PERSIST_DIR):
-    # load the documents and create the index
-    documents = SimpleDirectoryReader("./data").load_data()
-    index = VectorStoreIndex.from_documents(documents)
-    # store it for later
-    index.storage_context.persist(persist_dir=PERSIST_DIR)
+
+# load the documents and create the index
+documents = SimpleDirectoryReader("data").load_data()
+index = VectorStoreIndex.from_documents(documents)
+# store it for later
+index.storage_context.persist(persist_dir=PERSIST_DIR)
 
 if os.path.exists(PERSIST_DIR):
     # load the existing index
@@ -43,18 +43,19 @@ if os.path.exists(PERSIST_DIR):
 # Either way we can now query the index
 chat_engine = index.as_chat_engine(
     chat_mode="context",
-    system_prompt=(
-        "You are a chat assistant that helps users understand this article. Just answer based on the context of this article."
+    verbose=True,
+    context_prompt=(
+        "Only answer based on the knowledge of the article. Else jus say i dont know"
     ),
 )
+
+
 response = chat_engine.chat("hi")
 print(response)
 
-response = chat_engine.chat("who is first Malaysian prime minister?")
-print(response)
 
 response = chat_engine.chat("explain point 1 and 10")
 print(response)
 
-response = chat_engine.chat("apakah point ke-1 dan ke-10?")
+response = chat_engine.chat("who is Abu?")
 print(response)
