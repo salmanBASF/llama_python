@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title></title>
+    <title>Project Basic Setup - </title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Home";
-        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_name = "Project Basic Setup";
+        var mkdocs_page_input_path = "1-project-basic-setup.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -39,30 +39,30 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#python-programming-language">Python Programming Language</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#key-features-of-python">Key Features of Python:</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#llamaindex-library">llamaIndex Library</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#features-of-llamaindex">Features of llamaIndex:</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="0-visual-studio-code-setup.html">Visual Code Setup</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="1-project-basic-setup.html">Project Basic Setup</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Project Basic Setup</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#open-visual-studio-code">Open Visual Studio Code:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#open-project-directory">Open Project Directory:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-data-folder">Create Data Folder:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-env-file">Create .env File:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-mainpy">Create main.py:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-requirementstxt">Create requirements.txt:</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -91,7 +91,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Home</li>
+      <li class="breadcrumb-item active">Project Basic Setup</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -100,32 +100,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="introduction-to-python-and-llamaindex">Introduction to Python and llamaIndex</h1>
-<h2 id="python-programming-language">Python Programming Language</h2>
-<p>Python is a versatile and powerful programming language known for its simplicity and readability. It is widely used in various domains such as web development, data science, machine learning, and automation. Python's extensive standard library and third-party packages make it a popular choice for developers.</p>
-<h3 id="key-features-of-python">Key Features of Python:</h3>
-<ul>
-<li>Easy-to-read syntax</li>
-<li>Dynamically typed language</li>
-<li>Extensive standard library</li>
-<li>Strong community support</li>
-<li>Cross-platform compatibility</li>
-</ul>
-<h2 id="llamaindex-library">llamaIndex Library</h2>
-<p>llamaIndex is a Python library designed for building and working with search indexes. It provides functionalities for indexing and querying documents, enabling efficient search operations in Python applications.</p>
-<h3 id="features-of-llamaindex">Features of llamaIndex:</h3>
-<ul>
-<li>Document indexing and retrieval</li>
-<li>Query engine for search operations</li>
-<li>Support for vector store indexes</li>
-<li>Integration with data retrieval and analysis tasks</li>
-<li>Scalable and customizable search capabilities</li>
-</ul>
+                <h1 id="setup-basic-files">Setup Basic Files:</h1>
+<h2 id="open-visual-studio-code">Open Visual Studio Code:</h2>
+<p>Launch Visual Studio Code on your system.</p>
+<h2 id="open-project-directory">Open Project Directory:</h2>
+<p>Open the created project directory in Visual Studio Code.</p>
+<h2 id="create-data-folder">Create Data Folder:</h2>
+<p>Inside the project directory, create a <code>data</code> folder to store data files.</p>
+<pre><code>mkdir data
+</code></pre>
+<h2 id="create-env-file">Create .env File:</h2>
+<p>Create a <code>.env</code> file in the project directory to store environment variables.
+Add the necessary environment variables to the <code>.env</code> file. Note: this is a personal API key, do not share it.</p>
+<pre><code>OPENAI_API_KEY=
+</code></pre>
+<h2 id="create-mainpy">Create main.py:</h2>
+<p>Create a <code>main.py</code> Python script in the project directory as the main entry point for the project.</p>
+<h2 id="create-requirementstxt">Create requirements.txt:</h2>
+<p>Create a <code>requirements.txt</code> file in the project directory to list project dependencies.
+Add the required Python packages and their versions to the <code>requirements.txt</code> file.</p>
+<pre><code>
+llama-index==0.10.*
+python-dotenv==1.*
+chromadb
+llama-index-vector-stores-chroma
+
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="0-visual-studio-code-setup.html" class="btn btn-neutral float-right" title="Visual Code Setup">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="0-visual-studio-code-setup.html" class="btn btn-neutral float-left" title="Visual Code Setup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="2-install-packages.html" class="btn btn-neutral float-right" title="Install Packages">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -148,8 +154,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="0-visual-studio-code-setup.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="0-visual-studio-code-setup.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="2-install-packages.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -166,8 +174,3 @@
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.6.0
-Build Date UTC : 2024-07-05 08:33:40.433231+00:00
--->

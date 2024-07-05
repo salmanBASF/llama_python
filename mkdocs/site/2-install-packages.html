@@ -3,17 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title></title>
+    <title>Install Packages - </title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Home";
-        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_name = "Install Packages";
+        var mkdocs_page_input_path = "2-install-packages.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -39,22 +39,8 @@
       </div>
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Home</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#python-programming-language">Python Programming Language</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#key-features-of-python">Key Features of Python:</a>
-    </li>
-        </ul>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#llamaindex-library">llamaIndex Library</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#features-of-llamaindex">Features of llamaIndex:</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="index.html">Home</a>
                 </li>
               </ul>
               <ul>
@@ -65,8 +51,18 @@
                 <li class="toctree-l1"><a class="reference internal" href="1-project-basic-setup.html">Project Basic Setup</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="2-install-packages.html">Install Packages</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Install Packages</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#navigate-to-the-project-directory">Navigate to the Project Directory:</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#activate-the-virtual-environment-recommended">Activate the Virtual Environment (Recommended):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#install-packages-from-requirementstxt_1">Install Packages from requirements.txt</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#verify-package-installation">Verify Package Installation:</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -91,7 +87,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Home</li>
+      <li class="breadcrumb-item active">Install Packages</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -100,32 +96,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="introduction-to-python-and-llamaindex">Introduction to Python and llamaIndex</h1>
-<h2 id="python-programming-language">Python Programming Language</h2>
-<p>Python is a versatile and powerful programming language known for its simplicity and readability. It is widely used in various domains such as web development, data science, machine learning, and automation. Python's extensive standard library and third-party packages make it a popular choice for developers.</p>
-<h3 id="key-features-of-python">Key Features of Python:</h3>
-<ul>
-<li>Easy-to-read syntax</li>
-<li>Dynamically typed language</li>
-<li>Extensive standard library</li>
-<li>Strong community support</li>
-<li>Cross-platform compatibility</li>
-</ul>
-<h2 id="llamaindex-library">llamaIndex Library</h2>
-<p>llamaIndex is a Python library designed for building and working with search indexes. It provides functionalities for indexing and querying documents, enabling efficient search operations in Python applications.</p>
-<h3 id="features-of-llamaindex">Features of llamaIndex:</h3>
-<ul>
-<li>Document indexing and retrieval</li>
-<li>Query engine for search operations</li>
-<li>Support for vector store indexes</li>
-<li>Integration with data retrieval and analysis tasks</li>
-<li>Scalable and customizable search capabilities</li>
-</ul>
+                <h1 id="install-packages-from-requirementstxt">Install Packages from <code>requirements.txt</code></h1>
+<h2 id="navigate-to-the-project-directory">Navigate to the Project Directory:</h2>
+<p>Open Command Prompt (not Powershell!) and navigate to the directory where your Python project is located.</p>
+<p>Use the <code>cd</code> command to navigate to the directory where your Python script <code>&lt;file&gt;.py</code> is located or simply use the terminal in Visual Studio Code.</p>
+<h2 id="activate-the-virtual-environment-recommended">Activate the Virtual Environment (Recommended):</h2>
+<p>Virtual environments in Python are used to create isolated environments for Python projects, allowing you to manage dependencies and packages separately for each project.</p>
+<p>Activate it using the following command:</p>
+<pre><code>venv\Scripts\activate
+</code></pre>
+<h2 id="install-packages-from-requirementstxt_1">Install Packages from <code>requirements.txt</code></h2>
+<p>Use <code>pip</code> to install the packages listed in the <code>requirements.txt</code> file:</p>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+<h2 id="verify-package-installation">Verify Package Installation:</h2>
+<p>Check that the required packages are installed correctly:</p>
+<pre><code>pip list
+</code></pre>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="0-visual-studio-code-setup.html" class="btn btn-neutral float-right" title="Visual Code Setup">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="1-project-basic-setup.html" class="btn btn-neutral float-left" title="Project Basic Setup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="3-before-run.html" class="btn btn-neutral float-right" title="Before Run Project">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -148,8 +141,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="1-project-basic-setup.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
-      <span><a href="0-visual-studio-code-setup.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+      <span><a href="3-before-run.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
@@ -166,8 +161,3 @@
 
 </body>
 </html>
-
-<!--
-MkDocs version : 1.6.0
-Build Date UTC : 2024-07-05 08:33:40.433231+00:00
--->

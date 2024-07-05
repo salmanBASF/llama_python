@@ -1,4 +1,3 @@
-site_name: My Docs
 nav:
   - Home: index.md
   - Visual Code Setup: 0-visual-studio-code-setup.md
@@ -6,3 +5,8 @@ nav:
   - Install Packages: 2-install-packages.md
   - Before Run Project: 3-before-run.md
   - Run Project: 4-run-project.md
+theme:
+  name: readthedocs
+#For Local : Set use_directory_urls to false and site_name "". Otherwise, internal links between pages will not work properly.
+site_name: ""
+use_directory_urls: false
