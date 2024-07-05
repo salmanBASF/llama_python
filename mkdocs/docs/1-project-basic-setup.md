@@ -17,7 +17,7 @@ Create a `.env` file in the project directory to store environment variables.
 Add the necessary environment variables to the `.env` file. Note: this is a personal API key, do not share it.
 
 ```
-OPENAI_API_KEY=sk-proj-YJfIghXUvkuWwAZOgAVcT3BlbkFJSboe6GLdcYRb9AdsIqW3
+OPENAI_API_KEY=put-api-key-here
 ```
 
 ## Create main.py:
