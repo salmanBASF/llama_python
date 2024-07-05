@@ -1,6 +1,3 @@
-
-
-
 ### Setting
 import setting to set the LLM model
 
