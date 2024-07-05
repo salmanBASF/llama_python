@@ -18,3 +18,7 @@ lib/
 libs/
 lib64/
 bin/
+
+
+#MacOS finder files
+.DS_Store
