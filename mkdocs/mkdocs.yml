@@ -1,0 +1,8 @@
+site_name: My Docs
+nav:
+  - Home: index.md
+  - Visual Code Setup: 0-visual-studio-code-setup.md
+  - Project Basic Setup: 1-project-basic-setup.md
+  - Install Packages: 2-install-packages.md
+  - Before Run Project: 3-before-run.md
+  - Run Project: 4-run-project.md

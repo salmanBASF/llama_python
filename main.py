@@ -46,7 +46,7 @@ if os.path.exists(INDEX_STORAGE_DIR):
 query_engine = index.as_query_engine()
 
 # You can query any information you want from the document you uploaded
-response = query_engine.query("Who is the first scorer?")
+response = query_engine.query("Write a summary for the match.")
 
 # print the response to the console
 print(response)
