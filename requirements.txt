@@ -1,2 +1,4 @@
 llama-index==0.10.*
 python-dotenv==1.*
+chromadb
+llama-index-vector-stores-chroma
