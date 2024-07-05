@@ -22,12 +22,13 @@ api_key = os.getenv("OPENAI_API_KEY")
 
 if api_key is None:
     # raises an error that needs to be handled by the calling code or by an exception handler.
-    raise ValueError("OPENAI_API_KEY environment variable not set")
+    raise ValueError("OPENAI_API_KEY variable not set in .env")
 
 
-# directory of index
+# index directory name
 INDEX_STORAGE_DIR = "./index_storage"
 
+# check the index storage directory not exists, create the new indwx
 if not os.path.exists(INDEX_STORAGE_DIR):
     # load the documents and create the index
     documents = SimpleDirectoryReader("./data").load_data()
@@ -35,16 +36,17 @@ if not os.path.exists(INDEX_STORAGE_DIR):
     # store it for later
     index.storage_context.persist(persist_dir=INDEX_STORAGE_DIR)
 
+# if the index storage directory exists, load the existing index
 if os.path.exists(INDEX_STORAGE_DIR):
-    # load the existing index
     storage_context = StorageContext.from_defaults(persist_dir=INDEX_STORAGE_DIR)
     index = load_index_from_storage(storage_context)
 
 
-# Either way we can now query the index
+# index object is being used to create a query engine for searching and retrieving information from the index
 query_engine = index.as_query_engine()
 
 # You can query any information you want from the document you uploaded
-response = query_engine.query("What is the sources of this article?")
+response = query_engine.query("Who is the first scorer?")
 
+# print the response to the console
 print(response)
