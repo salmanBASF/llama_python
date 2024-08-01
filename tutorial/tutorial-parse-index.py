@@ -31,11 +31,14 @@ LLAMA_CLOUD_API_KEY = os.getenv("LLAMA_CLOUD_API_KEY")
 # ---------------- LLAMA CLOUD : PARSING----------------#
 
 
-# Specify the filename for the HTML document to be parsed. Note: exclude the .html extension
-HTML_FILENAME = "meta_ai"
+# Specify the origin filename of the document to be parsed. Note: the file must be inside storage_origin folder
+ORIGIN_FILE_NAME = "majesto_short_story.pdf"
 
-# Specify the output file path for the parsed document. Note: md is file extension for markdown files
-PARSE_FILE_PATH = f"./storage_parse/{HTML_FILENAME}.md"
+# Split the filename into the base name and extension
+origin_basename, extension = os.path.splitext(ORIGIN_FILE_NAME)
+
+# Specify the file path for the parsed document. Note: md is file extension for markdown files. e.g /storage_parse/meta_ai.md
+PARSE_FILE_PATH = f"./storage_parse/{origin_basename}.md"
 
 # check if PARSE_FILE_PATH is exists,
 if os.path.exists(PARSE_FILE_PATH):
@@ -49,8 +52,8 @@ else:
         parsing_instruction="Extract main content. Remove navigation elements , sidebars, footers, and unrelated content. Set heading level 1 for the title of the content. There is only one heading level 1",  # parsing instructions
     )
 
-    # Load the HTML document using the parser's load_data method
-    documents = parser.load_data(f"./storage_document/{HTML_FILENAME}.html")
+    # Load the origin document using the parser's load_data method. e.g /storage_origin/meta_ai.html
+    documents = parser.load_data(f"./storage_origin/{ORIGIN_FILE_NAME}")
 
     # Extract the text content from the first document
     text_doc = documents[0].text
@@ -69,8 +72,8 @@ else:
 # ---------------- LLAMA INDEX : INDEXING----------------#
 
 
-# generate the folder named storage_index/{filename} automatically
-STORAGE_INDEX_DIR = f"./storage_index/{HTML_FILENAME}"
+# generate the folder named storage_index/{filename} automatically. e.g storage_index/meta_ai/
+STORAGE_INDEX_DIR = f"./storage_index/{origin_basename}"
 
 
 # if the index storage directory exists, load the existing index
@@ -91,7 +94,7 @@ else:
 query_engine = index.as_query_engine()
 
 # You can query any information you want from the document you uploaded
-response = query_engine.query("What is news about Llama 4?")
+response = query_engine.query("Summarize the document")
 
 # print the response to the console
 print(response)
