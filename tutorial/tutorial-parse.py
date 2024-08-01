@@ -1,7 +1,7 @@
 import os
 from llama_parse import LlamaParse
 from dotenv import load_dotenv
-from llama_index.core import SimpleDirectoryReader
+
 
 # Load environment variables from .env file
 load_dotenv()
@@ -20,7 +20,7 @@ parser = LlamaParse(
 html_filename = "samsung_galaxy"
 
 # Load the HTML document using the parser's load_data method
-documents = parser.load_data(f"./resources/raw/{html_filename}.html")
+documents = parser.load_data(f"./storage_document/{html_filename}.html")
 
 # Extract the text content from the first document
 text_doc = documents[0].text
@@ -29,11 +29,11 @@ text_doc = documents[0].text
 print(text_doc)
 
 # Specify the output file path for the parsed document. Note: md is file extension for markdown files
-output_file_path = f"./data/parsed/{html_filename}.md"
+parse_file_path = f"./storage_parse/{html_filename}.md"
 
 # Write the extracted text to the output file
-with open(output_file_path, "w", encoding="utf-8") as output_file:
+with open(parse_file_path, "w", encoding="utf-8") as output_file:
     output_file.write(text_doc)
 
 # Print a message indicating the successful download and save of the parsed document
-print(f"Documents downloaded and saved to {output_file_path}")
+print(f"Documents downloaded and saved to {parse_file_path}")
