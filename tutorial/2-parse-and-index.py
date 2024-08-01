@@ -4,7 +4,8 @@ from dotenv import load_dotenv
 
 # Import the classes and functions from llama_index
 from llama_index.core import (
-    VectorStoreIndex,  # used for creating a vector store index, which is a data structure used for efficient storage and retrieval of vectors.
+    VectorStoreIndex,  # used for loading an index from a storage location, allowing the retrieval of an existing index for further processing.
+    # used for creating a vector store index, which is a data structure used for efficient storage and retrieval of vectors.
     SimpleDirectoryReader,  # used for reading data from a simple directory structure, which may contain text documents or other data files.
     StorageContext,  # This class may provide a context for storing data or managing storage-related operations within the llama_index framework.
     load_index_from_storage,  # used for loading an index from a storage location, allowing the retrieval of an existing index for further processing.
