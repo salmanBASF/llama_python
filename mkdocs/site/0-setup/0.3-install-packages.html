@@ -49,6 +49,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../0-about/llamaindex.html">About LlamaIndex</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../0-about/llama_parse.html">About LlamaParse</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Setup</span></p>
               <ul class="current">
@@ -60,12 +62,6 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#navigate-to-the-project-directory">Navigate to the Project Directory:</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#activate-the-virtual-environment-recommended">Activate the Virtual Environment (Recommended):</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#install-packages-from-requirementstxt_1">Install Packages from requirements.txt</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#verify-package-installation">Verify Package Installation:</a>
-    </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="0.4-before-run.html">Before Run Project</a>
@@ -73,9 +69,9 @@
                   <li class="toctree-l1"><a class="reference internal" href="0.5-run-project.html">Run Project</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Tutorial</span></p>
+              <p class="caption"><span class="caption-text">Instruction</span></p>
               <ul>
-                  <li class="toctree-l1"><a class="reference internal" href="../1-tutorial/1.1-tutorial-parse.html">LlamaParse</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../1-instruction/1.1-llamaparse.html">LlamaParse</a>
                   </li>
               </ul>
       </div>
@@ -106,14 +102,21 @@
 <h2 id="navigate-to-the-project-directory">Navigate to the Project Directory:</h2>
 <p>Open Command Prompt (not Powershell!) and navigate to the directory where your Python project is located.</p>
 <p>Use the <code>cd</code> command to navigate to the directory where your Python script <code>&lt;file&gt;.py</code> is located or simply use the terminal in Visual Studio Code.</p>
+<h1 id="create-the-virtual-environment">Create the Virtual Environment</h1>
+<pre><code>python -m venv venv
+</code></pre>
 <h2 id="activate-the-virtual-environment-recommended">Activate the Virtual Environment (Recommended):</h2>
 <p>Virtual environments in Python are used to create isolated environments for Python projects, allowing you to manage dependencies and packages separately for each project.</p>
 <p>Activate it using the following command:</p>
-<pre><code>venv\Scripts\activate
+<pre><code>#for windows
+venv\Scripts\activate
+
+#for mac
+source venv/bin/activate
 </code></pre>
 <h2 id="install-packages-from-requirementstxt_1">Install Packages from <code>requirements.txt</code></h2>
 <p>Use <code>pip</code> to install the packages listed in the <code>requirements.txt</code> file:</p>
-<pre><code>pip install -r requirements.txt
+<pre><code class="language-bash">pip install -r requirements.txt
 </code></pre>
 <h2 id="verify-package-installation">Verify Package Installation:</h2>
 <p>Check that the required packages are installed correctly:</p>

@@ -13,7 +13,7 @@
       <script>
         // Current page data
         var mkdocs_page_name = "LlamaParse";
-        var mkdocs_page_input_path = "1-tutorial/1.1-tutorial-parse.md";
+        var mkdocs_page_input_path = "1-instruction/1.1-llamaparse.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -49,6 +49,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../0-about/llamaindex.html">About LlamaIndex</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../0-about/llama_parse.html">About LlamaParse</a>
+                  </li>
               </ul>
               <p class="caption"><span class="caption-text">Setup</span></p>
               <ul>
@@ -63,13 +65,11 @@
                   <li class="toctree-l1"><a class="reference internal" href="../0-setup/0.5-run-project.html">Run Project</a>
                   </li>
               </ul>
-              <p class="caption"><span class="caption-text">Tutorial</span></p>
+              <p class="caption"><span class="caption-text">Instruction</span></p>
               <ul class="current">
                   <li class="toctree-l1 current"><a class="reference internal current" href="#">LlamaParse</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#why-need-to-parse-document">Why need to parse document?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#what-can-be-parse">What can be parse?</a>
+    <li class="toctree-l2"><a class="reference internal" href="#add-llamaparse-to-requirementstxt">Add llamaparse to requirements.txt:</a>
     </li>
     </ul>
                   </li>
@@ -88,7 +88,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../index.html" class="icon icon-home" aria-label="Docs"></a></li>
-          <li class="breadcrumb-item">Tutorial</li>
+          <li class="breadcrumb-item">Instruction</li>
       <li class="breadcrumb-item active">LlamaParse</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -98,46 +98,44 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="llamaparse">LLAMAPARSE</h1>
-<p>LlamaParse is a component of LlamaCloud that allows you to parse complex documents such as PDFs, PowerPoints, Word documents and spreadsheets into structured data.</p>
-<h2 id="why-need-to-parse-document">Why need to parse document?</h2>
-<p><strong>Parsing documents</strong> is essential for extracting structured information from unstructured text data. Here are some key reasons why document parsing is necessary:</p>
-<p><strong>Data Extraction</strong>: Parsing documents allows for the extraction of specific data elements, such as names, dates, locations, and numerical values, from unstructured text. This extracted data can be used for analysis, reporting, and decision-making.</p>
-<p><strong>Information Organization</strong>: By parsing documents, unstructured text can be transformed into a structured format, making it easier to organize and categorize information. This structured data can then be stored, searched, and accessed more efficiently.</p>
-<p><strong>Data Analysis</strong>: Parsed documents enable data analysis and insights generation. By extracting structured information, such as key entities and relationships, from text data, organizations can derive valuable insights and make informed decisions.</p>
-<p><strong>Automation</strong>: Document parsing automates the process of extracting information from text documents, reducing manual effort and increasing efficiency. Automated parsing can save time, improve accuracy, and streamline data processing workflows.</p>
-<p><strong>Information Retrieval</strong>: Parsed documents facilitate quick and accurate information retrieval. By extracting structured data elements, documents can be indexed, searched, and accessed more effectively, enabling users to find relevant information easily.</p>
-<p><strong>Compliance and Regulatory Requirements</strong>: Document parsing is crucial for compliance with regulatory requirements and standards. By parsing documents to extract specific information, organizations can ensure they meet regulatory obligations and maintain data integrity.</p>
-<p>Overall, document parsing is essential for transforming unstructured text data into structured information, enabling data extraction, organization, analysis, automation, and compliance with regulatory requirements.</p>
-<h2 id="what-can-be-parse">What can be parse?</h2>
-<p><strong>LLamaParse</strong> is a versatile natural language processing tool that can parse various types of information from unstructured text data. Some of the key elements that can be parsed using LLamaParse include:</p>
-<ul>
-<li>
-<p><strong>Entities</strong>: LLamaParse can extract entities such as names of people, organizations, locations, dates, and numerical values from text data.</p>
-</li>
-<li>
-<p><strong>Relationships</strong>: The tool can identify relationships between entities, providing insights into connections and dependencies within the text.</p>
-</li>
-<li>
-<p><strong>Key Phrases</strong>: LLamaParse can parse key phrases and terms that are relevant to the context of the text, helping to identify important information.</p>
-</li>
-<li>
-<p><strong>Sentiment</strong>: The tool can analyze the sentiment expressed in the text, identifying whether the sentiment is positive, negative, or neutral.</p>
-</li>
-<li>
-<p><strong>Events</strong>: LLamaParse can parse information about events, including dates, times, locations, and descriptions of events mentioned in the text.</p>
-</li>
-<li>
-<p><strong>Actions</strong>: The tool can identify actions or verbs mentioned in the text, providing insights into the activities or events described.</p>
-</li>
-<li>
-<p><strong>Categories</strong>: LLamaParse can categorize text data into predefined categories or topics based on the content and context of the text.</p>
-</li>
-<li>
-<p><strong>Custom Information</strong>: LLamaParse can be customized and trained to parse specific types of information or entities based on the requirements of the user or application.</p>
-</li>
-</ul>
-<p>Overall, LLamaParse offers a wide range of parsing capabilities, enabling the extraction of structured information from unstructured text data to facilitate data analysis, information retrieval, and knowledge management tasks.</p>
+                <h1 id="tutorial-llamaparse-setup">Tutorial: LlamaParse setup</h1>
+<h2 id="add-llamaparse-to-requirementstxt">Add llamaparse to requirements.txt:</h2>
+<pre><code>
+llama-index==0.10.*
+python-dotenv==1.*
+chromadb
+llama-index-vector-stores-chroma
+llamaparse
+
+</code></pre>
+<h1 id="create-a-virtual-environment-only-if-you-never-created-one-before">create a virtual environment (only if you never created one before)</h1>
+<pre><code>python -m venv venv
+</code></pre>
+<h2 id="activate-the-virtual-environment">activate the virtual environment</h2>
+<pre><code>#for MAC
+source venv/bin/activate
+
+#for Windows
+venv\Scripts\activate
+</code></pre>
+<h2 id="install-the-dependencies">install the dependencies</h2>
+<pre><code>pip install -r requirements.txt
+</code></pre>
+<h2 id="add-llama_cloud_api_key-to-env">Add LLAMA_CLOUD_API_KEY to .env</h2>
+<pre><code>OPENAI_API_KEY=
+
+LLAMA_CLOUD_API_KEY=
+</code></pre>
+<h2 id="create-3-storage-directories">Create 3 storage directories</h2>
+<pre><code> storage_origin
+ storage_parse
+ storage_index
+ ```
+
+## Create tutorial directory
+</code></pre>
+<p>tutorial/parse_html.py
+```</p>
               
             </div>
           </div><footer>

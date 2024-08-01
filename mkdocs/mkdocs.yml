@@ -3,14 +3,15 @@ nav:
   - About:
     - About Python: 0-about/python.md
     - About LlamaIndex: 0-about/llamaindex.md
+    - About LlamaParse: 0-about/llama_parse.md
   - Setup:
     - Visual Code Setup: 0-setup/0.1-visual-studio-code-setup.md
     - Project Basic Setup: 0-setup/0.2-project-basic-setup.md
     - Install Packages: 0-setup/0.3-install-packages.md
     - Before Run Project: 0-setup/0.4-before-run.md
     - Run Project: 0-setup/0.5-run-project.md
-  - Tutorial: 
-    - LlamaParse: 1-tutorial/1.1-tutorial-parse.md
+  - Instruction: 
+    - LlamaParse: 1-instruction/1.1-llamaparse.md
 theme:
   name: readthedocs
 #For Local : Set use_directory_urls to false and site_name "". Otherwise, internal links between pages will not work properly.
