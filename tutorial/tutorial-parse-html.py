@@ -11,7 +11,7 @@ api_key = os.getenv("LLAMA_CLOUD_API_KEY")
 parser = LlamaParse(
     api_key=api_key,  # can also be set in your env as LLAMA_CLOUD_API_KEY
     result_type="markdown",  # "markdown" and "text" are available
-    parsing_instruction="Extract main content. Remove navigation elements , sidebars, footers, and unrelated content. Set heading level 1 for the title of the content. There is only one heading level 1",  # parsing instructions
+    parsing_instruction="Extract only the main content. Remove navigation,sidebars,footers,ads,related articles,related news,license, copyright and unrelated contents",  # parsing instructions
     show_progress=True,  # show progress bar
 )
 
@@ -20,7 +20,7 @@ parser = LlamaParse(
 html_filename = "samsung_galaxy"
 
 # Load the HTML document using the parser's load_data method
-documents = parser.load_data(f"./storage_document/{html_filename}.html")
+documents = parser.load_data(f"./storage_origin/{html_filename}.html")
 
 # Extract the text content from the first document
 text_doc = documents[0].text
