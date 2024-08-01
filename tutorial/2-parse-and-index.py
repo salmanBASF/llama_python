@@ -1,15 +1,17 @@
 import os
-from llama_parse import LlamaParse
-from dotenv import load_dotenv
 
 # Import the classes and functions from llama_index
 from llama_index.core import (
+    Settings,
     VectorStoreIndex,  # used for loading an index from a storage location, allowing the retrieval of an existing index for further processing.
     # used for creating a vector store index, which is a data structure used for efficient storage and retrieval of vectors.
     SimpleDirectoryReader,  # used for reading data from a simple directory structure, which may contain text documents or other data files.
     StorageContext,  # This class may provide a context for storing data or managing storage-related operations within the llama_index framework.
     load_index_from_storage,  # used for loading an index from a storage location, allowing the retrieval of an existing index for further processing.
 )
+from llama_index.llms.openai import OpenAI
+from llama_parse import LlamaParse
+from dotenv import load_dotenv
 
 
 # Load environment variables from .env file
@@ -19,9 +21,12 @@ load_dotenv()
 # ---------------- LLAMAINDEX : ENV KEYS----------------#
 
 # Read the API key from the environment variable
-api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
-if api_key is None:
+# LLM settings
+Settings.llm = OpenAI(api_key=openai_api_key)
+
+if openai_api_key is None:
     # raises an error that needs to be handled by the calling code or by an exception handler.
     raise ValueError("OPENAI_API_KEY variable not set in .env")
 

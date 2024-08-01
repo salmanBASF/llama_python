@@ -2,7 +2,7 @@ import os
 
 # Import the classes and functions from llama_index
 from llama_index.core import (
-    # Settings,
+    Settings,
     VectorStoreIndex,  # used for loading an index from a storage location, allowing the retrieval of an existing index for further processing.
     # used for creating a vector store index, which is a data structure used for efficient storage and retrieval of vectors.
     SimpleDirectoryReader,  # used for reading data from a simple directory structure, which may contain text documents or other data files.
@@ -20,10 +20,11 @@ load_dotenv()
 # ---------------- LLAMAINDEX : ENV KEYS----------------#
 
 # Read the API key from the environment variable
-api_key = os.getenv("OPENAI_API_KEY")
+openai_api_key = os.getenv("OPENAI_API_KEY")
 
+Settings.llm = OpenAI(api_key=openai_api_key)
 
-if api_key is None:
+if openai_api_key is None:
     # raises an error that needs to be handled by the calling code or by an exception handler.
     raise ValueError("OPENAI_API_KEY variable not set in .env")
 
@@ -35,7 +36,7 @@ LLAMA_CLOUD_API_KEY = os.getenv("LLAMA_CLOUD_API_KEY")
 
 
 # Specify the origin filename of the document to be parsed. Note: the file must be inside storage_origin folder
-ORIGIN_FILE_NAME = "majesto_short_story.pdf"
+ORIGIN_FILE_NAME = "samsung_galaxy.html"
 
 # Split the filename into the base name and extension
 origin_basename, extension = os.path.splitext(ORIGIN_FILE_NAME)

@@ -6,10 +6,10 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
-api_key = os.getenv("LLAMA_CLOUD_API_KEY")
+LLAMA_CLOUD_API_KEY = os.getenv("LLAMA_CLOUD_API_KEY")
 
 parser = LlamaParse(
-    api_key=api_key,  # can also be set in your env as LLAMA_CLOUD_API_KEY
+    api_key=LLAMA_CLOUD_API_KEY,  # can also be set in your env as LLAMA_CLOUD_API_KEY
     result_type="markdown",  # "markdown" and "text" are available
     parsing_instruction="Extract only the main content. Remove navigation,sidebars,footers,ads,related articles,related news,license, copyright and unrelated contents",  # parsing instructions
     show_progress=True,  # show progress bar
