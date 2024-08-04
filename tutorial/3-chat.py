@@ -36,10 +36,10 @@ LLAMA_CLOUD_API_KEY = os.getenv("LLAMA_CLOUD_API_KEY")
 
 
 # Specify the origin filename of the document to be parsed. Note: the file must be inside storage_origin folder
-ORIGIN_FILE_NAME = "samsung_galaxy.html"
+HARDCODED_FILE_NAME = "samsung_galaxy.html"
 
 # Split the filename into the base name and extension
-origin_basename, extension = os.path.splitext(ORIGIN_FILE_NAME)
+origin_basename, extension = os.path.splitext(HARDCODED_FILE_NAME)
 
 # Specify the file path for the parsed document. Note: md is file extension for markdown files. e.g /storage_parse/meta_ai.md
 PARSE_FILE_PATH = f"./storage_parse/{origin_basename}.md"
@@ -58,7 +58,7 @@ else:
     )
 
     # Load the origin document using the parser's load_data method. e.g /storage_origin/meta_ai.html
-    documents = parser.load_data(f"./storage_origin/{ORIGIN_FILE_NAME}")
+    documents = parser.load_data(f"./storage_origin/{HARDCODED_FILE_NAME}")
 
     # Extract the text content from the first document
     text_doc = documents[0].text
