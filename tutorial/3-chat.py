@@ -22,7 +22,7 @@ load_dotenv()
 # Read the API key from the environment variable
 openai_api_key = os.getenv("OPENAI_API_KEY")
 
-Settings.llm = OpenAI(api_key=openai_api_key)
+Settings.llm = OpenAI(model="gpt-3.5-turbo", temperature=0, api_key=openai_api_key)
 
 if openai_api_key is None:
     # raises an error that needs to be handled by the calling code or by an exception handler.
@@ -100,13 +100,7 @@ else:
     index.storage_context.persist(persist_dir=STORAGE_INDEX_DIR)
 
 # index object is being used to create a query engine for searching and retrieving information from the index
-chat_engine = index.as_chat_engine(
-    chat_mode="context",
-    verbose=True,
-    context_prompt=(
-        "Only answer based on the context of the index. Else just say it was outside of the context"
-    ),
-)
+query_engine = index.as_query_engine()
 
 print(
     "You may start chatting with your data. Enter 'exit' or 'quit' to end the chat. \n"
@@ -124,8 +118,8 @@ while True:
         break
 
     # Pass the user input to the chat engine for processing
-    response = chat_engine.chat(user_input)
+    response = query_engine.query(user_input)
 
     # Display the response from the chat engine
-    print("Chatbot: ", response)
+    print("Bot: ", response)
     print("\n")
