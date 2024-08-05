@@ -1,4 +1,7 @@
+# utis/main.py
+
 import os  # Importing the os module for operating system related functionalities
+import shutil  # built-in module that provides that allows you to perform various file-related tasks such as copying, moving, and deleting files and directories.
 from llama_index.core import (  # Importing specific classes from the llama_index.core module
     Settings,  # Importing the Settings class
     VectorStoreIndex,  # Importing the VectorStoreIndex class
@@ -6,68 +9,80 @@ from llama_index.core import (  # Importing specific classes from the llama_inde
     StorageContext,  # Importing the StorageContext class
     load_index_from_storage,  # Importing the load_index_from_storage function
 )
-from llama_index.llms.openai import (
-    OpenAI,
-)  # Importing the OpenAI class from the llama_index.llms.openai module
-from llama_parse import (
-    LlamaParse,
-)  # Importing the LlamaParse class from the llama_parse module
-from dotenv import (
-    load_dotenv,
-)  # Importing the load_dotenv function from the dotenv module
+
+# Importing the OpenAI class from the llama_index.llms.openai module
+from llama_index.llms.openai import OpenAI
+
+# Importing the LlamaParse class from the llama_parse module
+from llama_parse import LlamaParse
+
+from dotenv import load_dotenv
 
 # Load environment variables from .env file
 load_dotenv()
 
 
-def check_env_vars():  # Defining a function named check_env_vars
-    openai_api_key = os.getenv(
-        "OPENAI_API_KEY"
-    )  # Getting the value of the OPENAI_API_KEY environment variable
-    llama_cloud_api_key = os.getenv(
-        "LLAMA_CLOUD_API_KEY"
-    )  # Getting the value of the LLAMA_CLOUD_API_KEY environment variable
+def check_env_vars():
+    """
+    Check for necessary environment variables and return their values.
+    Raises:
+        ValueError: If any of the required environment variables are not set.
+    Returns:
+        tuple: OPENAI_API_KEY and LLAMA_CLOUD_API_KEY
+    """
+    # Getting the value of the OPENAI_API_KEY environment variable
+    openai_api_key = os.getenv("OPENAI_API_KEY")
 
-    if openai_api_key is None:  # Checking if the OPENAI_API_KEY variable is not set
-        raise ValueError(
-            "OPENAI_API_KEY variable not set in .env"
-        )  # Raising a ValueError with an error message
-    if (
-        llama_cloud_api_key is None
-    ):  # Checking if the LLAMA_CLOUD_API_KEY variable is not set
-        raise ValueError(
-            "LLAMA_CLOUD_API_KEY variable not set in .env"
-        )  # Raising a ValueError with an error message
+    # Getting the value of the LLAMA_CLOUD_API_KEY environment variable
+    llama_cloud_api_key = os.getenv("LLAMA_CLOUD_API_KEY")
 
+    # Checking if the OPENAI_API_KEY variable is not set
+    if openai_api_key is None:
+        raise ValueError("OPENAI_API_KEY variable not set in .env")
+
+    # Checking if the LLAMA_CLOUD_API_KEY variable is not set
+    if llama_cloud_api_key is None:
+        raise ValueError("LLAMA_CLOUD_API_KEY variable not set in .env")
+
+    # Returning the values of the environment variables
     return (
         openai_api_key,
         llama_cloud_api_key,
-    )  # Returning the values of the environment variables
+    )
 
 
 def initialize_openai(
     api_key,
-):  # Defining a function named initialize_openai that takes an api_key parameter
-    Settings.llm = OpenAI(
-        model="gpt-3.5-turbo", temperature=0, api_key=api_key
-    )  # Initializing the OpenAI model with the provided api_key
+):
+    """
+    Initialize the OpenAI model with the provided API key.
+    Args:
+        api_key (str): The API key for OpenAI.
+    """
+    # Initializing the OpenAI model with the provided api_key
+    Settings.llm = OpenAI(model="gpt-3.5-turbo", temperature=0, api_key=api_key)
 
 
-def parse_document(
-    file_name, api_key
-):  # Defining a function named parse_document that takes file_name and api_key parameters
-    origin_basename, extension = os.path.splitext(
-        file_name
-    )  # Splitting the file_name into basename and extension
-    parse_file_path = f"./storage_parse/{origin_basename}.md"  # Generating the parse_file_path based on the basename
+def parse_document(file_name, api_key):
+    """
+    Parse a document and save the parsed content to a markdown file.
+    Args:
+        file_name (str): The name of the file to parse.
+        api_key (str): The API key for LlamaParse.
+    Returns:
+        str: The path to the parsed document.
+    """
 
-    if os.path.exists(
-        parse_file_path
-    ):  # Checking if the parse_file_path already exists
-        print(
-            f"Using existing Parse Documents in {parse_file_path} \n"
-        )  # Printing a message indicating the use of existing parse documents
-        return parse_file_path  # Returning the parse_file_path
+    # Splitting the file_name into basename and extension
+    origin_basename, extension = os.path.splitext(file_name)
+
+    # Generating the parse_file_path based on the basename
+    parse_file_path = f"./storage_parse/{origin_basename}.md"
+
+    # Checking if the parse_file_path already exists
+    if os.path.exists(parse_file_path):
+        print(f"Using existing Parse Documents in {parse_file_path} \n")
+        return parse_file_path
 
     # else parse the document
     parser = LlamaParse(  # Creating an instance of the LlamaParse class
@@ -96,50 +111,49 @@ def parse_document(
     return parse_file_path  # Returning the parse_file_path
 
 
-def create_or_load_index(
-    parse_file_path, origin_basename
-):  # Defining a function named create_or_load_index that takes parse_file_path and origin_basename parameters
+def create_or_load_index(parse_file_path, origin_basename):
+    """
+    Create or load an index from the parsed document.
+    Args:
+        parse_file_path (str): The path to the parsed document.
+        origin_basename (str): The base name of the original document.
+    Returns:
+        VectorStoreIndex: The loaded or created index.
+    """
     storage_index_dir = f"./storage_index/{origin_basename}"  # Generating the storage_index_dir based on the origin_basename
 
-    if os.path.exists(
-        storage_index_dir
-    ):  # Checking if the storage_index_dir already exists
-        print(
-            f"Using existing Index in {storage_index_dir}/ \n"
-        )  # Printing a message indicating the use of existing index
-        storage_context = StorageContext.from_defaults(
-            persist_dir=storage_index_dir
-        )  # Creating a StorageContext instance with the persist_dir set to storage_index_dir
-        index = load_index_from_storage(
-            storage_context
-        )  # Loading the index from the storage context
-    else:
-        print(
-            f"Creating new index in {storage_index_dir}/ \n"
-        )  # Printing a message indicating the creation of a new index
+    # Checking if the storage_index_dir already exists
+    if os.path.exists(storage_index_dir):
+        print(f"Using existing Index in {storage_index_dir}/ \n")
 
-        parse_documents = SimpleDirectoryReader(  # Creating an instance of the SimpleDirectoryReader class
-            input_files=[
-                parse_file_path
-            ]  # Providing the parse_file_path as the input_files parameter
+        # Creating a StorageContext instance with the persist_dir set to storage_index_dir
+        storage_context = StorageContext.from_defaults(persist_dir=storage_index_dir)
+
+        # Loading the index from the storage context
+        index = load_index_from_storage(storage_context)
+    else:
+        print(f"Creating new index in {storage_index_dir}/ \n")
+
+        # Creating an instance of the SimpleDirectoryReader class
+        # Providing the parse_file_path as the input_files parameter
+        parse_documents = SimpleDirectoryReader(
+            input_files=[parse_file_path]
         ).load_data()  # Loading data using the SimpleDirectoryReader instance
 
-        index = VectorStoreIndex.from_documents(
-            parse_documents
-        )  # Creating a VectorStoreIndex from the parse_documents
-        index.storage_context.persist(
-            persist_dir=storage_index_dir
-        )  # Persisting the index to the storage context
+        # Creating a VectorStoreIndex from the parse_documents
+        index = VectorStoreIndex.from_documents(parse_documents)
+
+        # Persisting the index to the storage context
+        index.storage_context.persist(persist_dir=storage_index_dir)
 
     return index  # Returning the index
 
 
 def chat_with_index(index) -> None:
     """
-    Function to chat with a given index using a query engine.
-
-    Parameters:
-    index: The index object used to create the query engine.
+    Chat with a given index using a query engine.
+    Args:
+        index (VectorStoreIndex): The index to use for the chat.
     """
     query_engine = index.as_query_engine()  # Creating a query engine from the index
 
@@ -168,10 +182,9 @@ def chat_with_index(index) -> None:
 
 def chat_with_index_with_options(index) -> None:
     """
-    Function to chat with a given index using a query engine.
-
-    Parameters:
-    index: The index object used to create the query engine.
+    Chat with a given index using a query engine with predefined options.
+    Args:
+        index (VectorStoreIndex): The index to use for the chat.
     """
     query_engine = index.as_query_engine()  # Creating a query engine from the index
 
@@ -224,6 +237,35 @@ def chat_with_index_with_options(index) -> None:
             print("Invalid selection. Please choose a valid option.\n")
 
 
+def upload_file():
+    """
+    Prompt the user to upload a file and move it to the storage_origin directory.
+    Returns:
+        str: The new path to the uploaded file.
+    """
+    while True:
+        file_path = input("Please enter the path to your file: ").strip()
+        if os.path.isfile(file_path):
+            # Create storage_origin directory if it doesn't exist
+            storage_origin_dir = "./storage_origin"
+            if not os.path.exists(storage_origin_dir):
+                os.makedirs(storage_origin_dir)
+
+            # Get the basename of the file to move
+            file_name = os.path.basename(file_path)
+            new_file_path = os.path.join(storage_origin_dir, file_name)
+
+            # Move the file to the storage_origin directory
+            shutil.copy(file_path, new_file_path)
+            print(f"File moved to {new_file_path}")
+            return file_name
+        else:
+            print("Invalid file path. Please try again.")
+
+
 # Example usage:
-# Assuming 'my_index' is an instance of your index
-# chat_with_index(my_index)
+# openai_api_key, llama_cloud_api_key = check_env_vars()
+# initialize_openai(openai_api_key)
+# parse_file_path = parse_document("example.txt", llama_cloud_api_key)
+# index = create_or_load_index(parse_file_path, "example")
+# chat_with_index(index) or chat_with_index_with_options(index)

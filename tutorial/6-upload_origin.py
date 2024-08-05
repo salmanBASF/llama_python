@@ -1,3 +1,5 @@
+# tutorial/5-upload-origin.py
+
 import os
 
 from utils.main import (
@@ -6,6 +8,7 @@ from utils.main import (
     parse_document,
     create_or_load_index,
     chat_with_index_with_options,
+    upload_file,
 )
 
 
@@ -16,14 +19,16 @@ def main():
     # Initialize OpenAI with the API key
     initialize_openai(openai_api_key)
 
-    # Specify the name of the file to parse
-    hardcoded_file_name = "proton_x70.html"
+    # TODO: instead of harcoding the file name, we want to user to upload the file and we will get the filename automatically
+    # hardcoded_file_name = "proton_x70.html"
+    file_name = upload_file()
 
     # Extract the base name of the file without the extension
-    origin_basename, _ = os.path.splitext(hardcoded_file_name)
+    origin_basename, _ = os.path.splitext(file_name)
+    # origin_basename = os.path.splitext(os.path.basename(file_path))[0]
 
     # Parse the document using the specified file name and the Llama Cloud API key
-    parse_file_path = parse_document(hardcoded_file_name, llama_cloud_api_key)
+    parse_file_path = parse_document(file_name, llama_cloud_api_key)
 
     # Create or load the index using the parsed file path and the base name
     index = create_or_load_index(parse_file_path, origin_basename)
