@@ -164,3 +164,66 @@ def chat_with_index(index) -> None:
             print(f"An error occurred: {e}")
 
         print("\n")  # Printing a new line
+
+
+def chat_with_index_with_options(index) -> None:
+    """
+    Function to chat with a given index using a query engine.
+
+    Parameters:
+    index: The index object used to create the query engine.
+    """
+    query_engine = index.as_query_engine()  # Creating a query engine from the index
+
+    print(
+        "Welcome to the chat! Select an option to start or type 'exit' or 'quit' to end the chat.\n"
+    )
+    options = {
+        "1": "What is this article about?",
+        "2": "List interesting points from the article.",
+        "3": "When was this article published?",
+        "4": "What is the source of the article?",
+        "5": "Other question",
+    }
+
+    while True:  # Starting an infinite loop
+        print("Options:")
+
+        # Iterate over the items in the options dictionary
+        for key, value in options.items():
+            print(f"{key}. {value}")  # Print the key and value of each item
+
+        user_selection = input("\n Select an option (1-5): ")
+
+        if user_selection.lower() in {
+            "exit",
+            "quit",
+        }:  # Checking if the user wants to exit the chat
+            print(
+                "Exiting chat..."
+            )  # Printing a message indicating the end of the chat
+            break  # Exiting the loop
+
+        if user_selection in options:
+            if user_selection == "5":
+                user_input = input("User: ")  # Prompting the user for custom input
+            else:
+                user_input = options[user_selection]
+
+            try:
+                # Querying the index with the user input
+                response = query_engine.query(user_input)
+                print("Bot: ", response)  # Printing the response from the index
+            except Exception as e:
+                print(
+                    f"An error occurred: {e}"
+                )  # Handling any exceptions that occur during the query
+
+            print("\n")  # Printing a new line
+        else:
+            print("Invalid selection. Please choose a valid option.\n")
+
+
+# Example usage:
+# Assuming 'my_index' is an instance of your index
+# chat_with_index(my_index)
