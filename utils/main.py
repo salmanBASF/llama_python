@@ -134,28 +134,33 @@ def create_or_load_index(
     return index  # Returning the index
 
 
-def chat_with_index(
-    index,
-):  # Defining a function named chat_with_index that takes an index parameter
+def chat_with_index(index) -> None:
+    """
+    Function to chat with a given index using a query engine.
+
+    Parameters:
+    index: The index object used to create the query engine.
+    """
     query_engine = index.as_query_engine()  # Creating a query engine from the index
 
     print(
-        "You may start chatting with your data. Enter 'exit' or 'quit' to end the chat. \n"
-    )  # Printing a message indicating the start of the chat
+        "You may start chatting with your data. Enter 'exit' or 'quit' to end the chat.\n"
+    )
 
     while True:  # Starting an infinite loop
         user_input = input("User: ")  # Prompting the user for input
-        if user_input.lower() in {
-            "exit",
-            "quit",
-        }:  # Checking if the user wants to exit the chat
-            print(
-                "Exiting chat..."
-            )  # Printing a message indicating the end of the chat
+
+        # Checking if the user wants to exit the chat
+        if user_input.lower() in {"exit", "quit"}:
+            print("Exiting chat...")
             break  # Exiting the loop
 
-        response = query_engine.query(
-            user_input
-        )  # Querying the index with the user input
-        print("Bot: ", response)  # Printing the response from the index
+        try:
+            # Querying the index with the user input
+            response = query_engine.query(user_input)
+            print("Bot: ", response)
+
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
         print("\n")  # Printing a new line
