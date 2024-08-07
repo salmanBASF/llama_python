@@ -1,5 +1,8 @@
 llama-index==0.10.*
 python-dotenv==1.*
-chromadb
-llama-index-vector-stores-chroma
+# chromadb
+# llama-index-vector-stores-chroma
+# start use in tutorial 1
 llama_parse
+# use in tutorial 8
+llama-index-readers-web

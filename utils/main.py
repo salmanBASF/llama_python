@@ -22,6 +22,8 @@ from dotenv import load_dotenv
 # Load environment variables from .env file
 load_dotenv()
 
+from utils.parse import extraction_rules
+
 
 def check_env_vars():
     """
@@ -89,11 +91,12 @@ def parse_document(file_name, api_key):
     parser = LlamaParse(  # Creating an instance of the LlamaParse class
         api_key=api_key,  # Passing the api_key parameter to the LlamaParse constructor
         result_type="markdown",  # Setting the result_type to "markdown"
-        parsing_instruction=(  # Providing parsing instructions as a string
-            "Extract main content. Remove navigation elements, sidebars, footers, "
-            "and unrelated content. Set heading level 1 for the title of the content. "
-            "There is only one heading level 1"
-        ),
+        # parsing_instruction=(  # Providing parsing instructions as a string
+        #     "Extract main content. Remove navigation elements, sidebars, footers, "
+        #     "and unrelated content. Set heading level 1 for the title of the content. "
+        #     "There is only one heading level 1"
+        # ),
+        parsing_instruction=extraction_rules,
     )
 
     # Loading data using the LlamaParse instance
@@ -193,10 +196,10 @@ def chat_with_index_with_options(index) -> None:
         "Welcome to the chat! Select an option to start or type 'exit' or 'quit' to end the chat.\n"
     )
     options = {
-        "1": "What is this article about?",
-        "2": "List interesting points from the article.",
-        "3": "When was this article published?",
-        "4": "What is the source of the article?",
+        "1": "What is title of the main content?",
+        "2": "List interesting points from the main content.",
+        "3": "Please summarize the main content",
+        "4": "What is the source of the content?",
         "5": "Other question",
     }
 
@@ -295,6 +298,31 @@ def save_website_html(url, file_name=None):
     # Save the HTML content to the file
     with open(file_path, "w", encoding="utf-8") as file:
         file.write(response.text)
+
+    print(f"Website HTML saved to {file_path}")
+
+    return file_name
+
+
+def save_to_storage_origin(text, file_name):
+    # storage_origin directory if it doesn't exist
+    storage_origin_dir = "./storage_origin"
+
+    # Derive the file name from the URL if not provided
+    if not file_name.endswith(".html"):
+        file_name += ".html"
+
+    # Create the full file path ending with extension .html
+    file_path = os.path.join(storage_origin_dir, file_name)
+
+    # Checking if the parse_file_path already exists
+    if os.path.exists(file_path):
+        print(f"Using existing origin document in {file_path} \n")
+        return file_name
+
+    # else Save the HTML content to the file
+    with open(file_path, "w", encoding="utf-8") as file:
+        file.write(text)
 
     print(f"Website HTML saved to {file_path}")
 
