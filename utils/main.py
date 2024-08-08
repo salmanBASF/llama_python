@@ -76,6 +76,7 @@ def parse_document(file_name, api_key):
     """
 
     # Splitting the file_name into basename and extension
+    # example file_name = "example.txt" -> origin_basename = "example", extension = ".txt"
     origin_basename, extension = os.path.splitext(file_name)
 
     # Generating the parse_file_path based on the basename
@@ -114,16 +115,20 @@ def parse_document(file_name, api_key):
     return parse_file_path  # Returning the parse_file_path
 
 
-def create_or_load_index(parse_file_path, origin_basename):
+def create_or_load_index(parse_file_path):
     """
     Create or load an index from the parsed document.
     Args:
         parse_file_path (str): The path to the parsed document.
-        origin_basename (str): The base name of the original document.
     Returns:
         VectorStoreIndex: The loaded or created index.
     """
-    storage_index_dir = f"./storage_index/{origin_basename}"  # Generating the storage_index_dir based on the origin_basename
+    # Extract the base name of the file without the extension
+    # example: parse_file_path = "./storage_parse/some-example.md" -> origin_basename = "some-example"
+    origin_basename = os.path.splitext(os.path.basename(parse_file_path))[0]
+
+    # name of storage_index directory based on the origin_basename
+    storage_index_dir = f"./storage_index/{origin_basename}"
 
     # Checking if the storage_index_dir already exists
     if os.path.exists(storage_index_dir):

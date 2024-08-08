@@ -19,14 +19,11 @@ def main():
     # Specify the name of the file to parse
     hardcoded_file_name = "proton_x70.html"
 
-    # Extract the base name of the file without the extension
-    origin_basename, _ = os.path.splitext(hardcoded_file_name)
-
     # Parse the document using the specified file name and the Llama Cloud API key
     parse_file_path = parse_document(hardcoded_file_name, llama_cloud_api_key)
 
     # Create or load the index using the parsed file path and the base name
-    index = create_or_load_index(parse_file_path, origin_basename)
+    index = create_or_load_index(parse_file_path)
 
     # Start a chat session with the created index
     chat_with_index(index)
