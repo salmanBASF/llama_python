@@ -1,5 +1,3 @@
-# tutorial/8-reader-simplewebpage.py
-
 import os
 
 from utils.main import (
@@ -7,10 +5,10 @@ from utils.main import (
     initialize_openai,
     parse_document,
     create_or_load_index,
-    chat_with_index_with_options,
-    save_text_to_storage_origin,
+    chat_with_index,
 )
-from llama_index.readers.web import SimpleWebPageReader
+
+# from llama_index.readers.file import PandasCSVReader
 
 
 def main():
@@ -20,35 +18,34 @@ def main():
     # Initialize OpenAI with the API key
     initialize_openai(openai_api_key)
 
-    # List of URLs from which you want to fetch data
-    urls = [
-        "https://says.com/my/news/council-demolishes-illegally-built-santorini-in-cameron-highlands"
-    ]
+    # Specify the name of the file to parse
+    excel_filename = "employeesData.csv"
 
-    # Create an instance of SimpleWebPageReader
-    web_page_reader = SimpleWebPageReader()
+    # parser = PandasCSVReader()
 
-    # Load data from the URLs
-    documents = web_page_reader.load_data(urls=urls)
+    # # Loading data using the LlamaParse instance
+    # documents = parser.load_data(f"./storage_origin/{excel_filename}")
 
-    # just take the first document
-    document = documents[0]
+    # # Extracting the text content from the parsed documents
+    # print(documents[0])
 
-    # Save the document to the storage_origin
-    file_name = save_text_to_storage_origin(document.text, "Santorini.html")
+    # # Opening the parse_file_path in write mode
+    # with open(parse_file_path, "w", encoding="utf-8") as output_file:
+    #     output_file.write(text_doc)  # Writing the text_doc content to the output_file
 
-    # Extract the base name of the file without the extension
-    origin_basename, _ = os.path.splitext(file_name)
-    # origin_basename = os.path.splitext(os.path.basename(file_path))[0]
+    # print(
+    #     f"Document parsed and saved to {parse_file_path}"
+    # )  # Printing a message indicating the successful parsing and saving of the document
+    # return parse_file_path  # Returning the parse_file_path
 
     # Parse the document using the specified file name and the Llama Cloud API key
-    parse_file_path = parse_document(file_name, llama_cloud_api_key)
+    parse_file_path = parse_document(excel_filename, llama_cloud_api_key)
 
     # Create or load the index using the parsed file path and the base name
-    index = create_or_load_index(parse_file_path, origin_basename)
+    index = create_or_load_index(parse_file_path)
 
-    # Start a chat session with the created index with predefined questions
-    chat_with_index_with_options(index)
+    # Start a chat session with the created index
+    chat_with_index(index)
 
 
 if __name__ == "__main__":

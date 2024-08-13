@@ -1,8 +1,9 @@
+# core library
 llama-index==0.10.*
+# utility library
 python-dotenv==1.*
-# chromadb
-# llama-index-vector-stores-chroma
-# start use in tutorial 1
+
+# start use in 1.parse-html
 llama_parse
-# use in tutorial 8
+# start use im 6.reader-url
 llama-index-readers-web

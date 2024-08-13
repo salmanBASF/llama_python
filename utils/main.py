@@ -79,7 +79,7 @@ def parse_document(file_name, api_key):
     # example file_name = "example.txt" -> origin_basename = "example", extension = ".txt"
     origin_basename, extension = os.path.splitext(file_name)
 
-    # Generating the parse_file_path based on the basename
+    # Generating the parse_file_path based on the basename, example parse_file_path = "./storage_parse/example.md"
     parse_file_path = f"./storage_parse/{origin_basename}.md"
 
     # Checking if the parse_file_path already exists

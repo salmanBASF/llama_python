@@ -22,9 +22,10 @@ def main():
 
     # url rom which you want to fetch data
     # NOTE: not every website can be parsed, some websites may block the request
-    url = "https://www.nst.com.my/sports/hockey/2024/08/1088779/hockey-india-beat-spain-secure-second-consecutive-bronze-medal"
+    url = "https://www.nst.com.my/opinion/letters/2024/08/1088777/earth-choking-waste"
 
-    # Extract the filename from url. e.g # Output: earth-choking-waste.html
+    # Extract the filename from url.
+    # Examples: url = "https://www.nst.com.my/news/earth-choking-waste" -> "earth-choking-waste.html"
     url_file_name = url.split("/")[-1] + ".html"
 
     # Create an instance of SimpleWebPageReader
@@ -36,7 +37,7 @@ def main():
     # just take the first document
     document = documents[0]
 
-    # Save the document to the storage_origin, please change the filename to your preference
+    # Save the document to the storage_origin
     save_text_to_storage_origin(document.text, url_file_name)
 
     # Parse the document using the specified file name and the Llama Cloud API key
